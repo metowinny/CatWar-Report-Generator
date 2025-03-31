@@ -88,6 +88,7 @@
     <div class="container">
         <div class="sidebar">
             <h3>Сохранённые шаблоны:</h3>
+            <input type="text" id="searchTemplate" placeholder="Поиск шаблонов" oninput="filterTemplates()">
             <div class="template-list" id="templateList"></div>
         </div>
         <div class="main">
@@ -107,9 +108,9 @@
             <div class="button-group">
                 <button onclick="saveTemplate()">Сохранить</button>
                 <button onclick="copyText()">Скопировать</button>
-                <button onclick="wrapWithTag('b')">[ b ]</button>
-                <button onclick="wrapWithTag('i')">[ i ]</button>
-                <button onclick="wrapWithUrl()">[ url ]</button
+                <button onclick="wrapWithTag('b')"> [ b ] </button>
+                <button onclick="wrapWithTag('i')"> [ i ] </button>
+                <button onclick="wrapWithUrl()"> [ url ] </button>
             </div>
         </div>
             <p>Для автоматического заполнения полей добавьте<br> <b>{ID_Игрока} и {Имя_Игрока}</b> в нужные места при<br> создании или редактировании шаблона.</p>
