@@ -17,7 +17,7 @@
         }
         .container {
             display: flex;
-            max-width: 1000px;
+            max-width: 1100px;
             width: 100%;
             background: #4b2c6f;
             padding: 20px;
@@ -91,11 +91,12 @@
         </div>
         <div class="main">
             <h1>✦ Генератор отчётов ✦</h1>
-            <p>Для автоматического заполнения полей добавьте<br> <b>{ID_Игрока} и {Имя_Игрока}</b> в нужные места.</p>
             <p class="small-text"><i>Сделано metowinny (Багряное Новолуние [1601504])</i></p>
+
+            <h2>Информация об игроке</h2>
             <div class="input-group">
-                <input type="text" id="playerID" placeholder="Введите ваш ID">
-                <input type="text" id="playerName" placeholder="Введите ваше имя">
+                <input type="text" id="playerID" placeholder="Введите Ваш ID">
+                <input type="text" id="playerName" placeholder="Введите Ваше имя">
             </div>
             <button onclick="saveUserData()">Сохранить</button>
             
@@ -106,6 +107,7 @@
                 <button onclick="saveTemplate()">Сохранить шаблон</button>
                 <button onclick="wrapWithUrl()">URL</button>
             </div>
+            <p>Для автоматического заполнения полей добавьте<br> <b>{ID_Игрока} и {Имя_Игрока}</b> в нужные места при<br> создании или редактировании шаблона.</p>
         </div>
     </div>
     
