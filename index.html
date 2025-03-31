@@ -17,26 +17,33 @@
         }
         .container {
             display: flex;
-            max-width: 1000px;
+            max-width: 900px;
             width: 100%;
             background: #4b2c6f;
-            padding: 30px;
+            padding: 20px;
             border-radius: 10px;
         }
         .sidebar {
-            width: 400px;
-            padding-right: 30px;
+            width: 300px;
+            padding-right: 20px;
         }
         .main {
             flex-grow: 1;
             text-align: center;
         }
+        .input-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .input-group input {
+            width: 50%;
+        }
         input, textarea, button {
-            width: calc(100% - 40px);
+            width: calc(100% - 20px);
             margin: 10px;
             padding: 10px;
-            border-radius: 10px;
-            border-color: #2B1545;
+            border-radius: 5px;
             border: none;
             font-family: 'Comfortaa', sans-serif;
         }
@@ -50,19 +57,19 @@
         }
         .template-list {
             text-align: left;
-            margin-top: 20px;
+            margin-top: 10px;
         }
         .template-item {
             background: #5d3a8d;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
             text-align: center;
         }
         .button-group {
             display: flex;
             justify-content: center;
-            gap: 2px;
+            gap: 5px;
         }
         .footer {
             text-align: center;
@@ -70,7 +77,7 @@
             font-size: 12px;
         }
         .small-text {
-            font-size: 10px;
+            font-size: 12px;
             text-align: center;
             margin-top: -10px;
         }
@@ -79,15 +86,13 @@
 <body>
     <div class="container">
         <div class="sidebar">
-            <h3>Сохранённые шаблоны:</h3>
+            <h3>Шаблоны:</h3>
             <div class="template-list" id="templateList"></div>
         </div>
         <div class="main">
-            <h1>✦ Генератор отчётов ✦</h1>
-            <p>Для автоматического заполнения полей добавьте<br> <b>{ID_Игрока} и {Имя_Игрока}</b> в нужные места.</p>
-            <p class="small-text"><i>Сделано metowinny (Багряное Новолуние [1601504])</i></p>
-
-            <h2>Добавить данные игрока</h2>
+            <h1>Генератор отчётов CatWar</h1>
+            <p>Для автоматического заполнения полей Имя Игрока и ID Игрока добавьте {ID_Игрока} и {Имя_Игрока} в нужные места.</p>
+            <p class="small-text">Сделано metowinny (Багряное Новолуние [1601504])</p>
             <div class="input-group">
                 <input type="text" id="playerID" placeholder="Введите ваш ID">
                 <input type="text" id="playerName" placeholder="Введите ваше имя">
@@ -97,7 +102,10 @@
             <h2>Добавить новый шаблон</h2>
             <input type="text" id="templateName" placeholder="Название шаблона">
             <textarea id="templateText" placeholder="Введите текст отчёта"></textarea>
-            <button onclick="saveTemplate()">Сохранить шаблон</button>
+            <div class="button-group">
+                <button onclick="saveTemplate()">Сохранить шаблон</button>
+                <button onclick="wrapWithUrl()">URL</button>
+            </div>
         </div>
     </div>
     
@@ -141,28 +149,17 @@
             });
         }
 
-        function useTemplate(index) {
-            let templates = JSON.parse(localStorage.getItem("templates"));
-            let text = templates[index].text;
-            let playerID = localStorage.getItem("playerID") || "{ID_Игрока}";
-            let playerName = localStorage.getItem("playerName") || "{Имя_Игрока}";
-            text = text.replace(/{ID_Игрока}/g, playerID).replace(/{Имя_Игрока}/g, playerName);
-            document.getElementById("templateText").value = text;
-            document.getElementById("templateName").value = templates[index].name;
-        }
-        
-        function editTemplate(index) {
-            let templates = JSON.parse(localStorage.getItem("templates"));
-            document.getElementById("templateName").value = templates[index].name;
-            document.getElementById("templateText").value = templates[index].text;
-            deleteTemplate(index);
-        }
-        
-        function deleteTemplate(index) {
-            let templates = JSON.parse(localStorage.getItem("templates"));
-            templates.splice(index, 1);
-            localStorage.setItem("templates", JSON.stringify(templates));
-            loadTemplates();
+        function wrapWithUrl() {
+            navigator.clipboard.readText().then((url) => {
+                let textarea = document.getElementById("templateText");
+                let start = textarea.selectionStart;
+                let end = textarea.selectionEnd;
+                let selectedText = textarea.value.substring(start, end) || "ссылка";
+                let newText = `[url=${url}]${selectedText}[/url]`;
+                textarea.setRangeText(newText, start, end, "end");
+            }).catch(err => {
+                alert("Ошибка: скопируйте ссылку в буфер обмена перед вставкой.");
+            });
         }
     </script>
 </body>
