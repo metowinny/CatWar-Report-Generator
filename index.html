@@ -106,12 +106,12 @@
             <div class="button-group">
                 <button onclick="saveTemplate()">Сохранить</button>
                 <button onclick="copyText()">Скопировать</button>
-                <button onclick="wrapWithTag('b')"> [ b ] </button>
-                <button onclick="wrapWithTag('i')"> [ i ] </button>
-                <button onclick="wrapWithUrl()"> [ url ] </button>
+                <button onclick="wrapWithTag('b')">[ b ]</button>
+                <button onclick="wrapWithTag('i')">[ i ]</button>
+                <button onclick="wrapWithUrl()">[ url ]</button>
             </div>
+        <p>Для автоматического заполнения полей добавьте<br> <b>{ID_Игрока} и {Имя_Игрока}</b> в нужные места при<br> создании или редактировании шаблона.</p>
         </div>
-            <p>Для автоматического заполнения полей добавьте<br> <b>{ID_Игрока} и {Имя_Игрока}</b> в нужные места при<br> создании или редактировании шаблона.</p>
     </div>
     
     <script>
@@ -135,6 +135,13 @@
             loadTemplates();
             document.getElementById("templateName").value = "";
             document.getElementById("templateText").value = "";
+        }
+
+        function copyText() {
+            let textarea = document.getElementById("templateText");
+            textarea.select();
+            document.execCommand("copy");
+            alert("Текст скопирован!");
         }
         
         function loadTemplates() {
