@@ -35,6 +35,18 @@
             text-align: left;
             margin-top: 10px;
         }
+        .template-item {
+            background: #5d3a8d;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
     </style>
 </head>
 <body>
@@ -55,7 +67,6 @@
     </div>
     
     <script>
-        // Загрузка сохранённых данных
         document.getElementById("playerID").value = localStorage.getItem("playerID") || "";
         document.getElementById("playerName").value = localStorage.getItem("playerName") || "";
         loadTemplates();
@@ -82,7 +93,13 @@
             templateList.innerHTML = "";
             templates.forEach((template, index) => {
                 let div = document.createElement("div");
-                div.innerHTML = `<p>${template}</p> <button onclick="useTemplate(${index})">Использовать</button>`;
+                div.classList.add("template-item");
+                div.innerHTML = `<p>${template}</p>
+                <div class='button-group'>
+                    <button onclick="useTemplate(${index})">Использовать</button>
+                    <button onclick="editTemplate(${index})">Редактировать</button>
+                    <button onclick="deleteTemplate(${index})">Удалить</button>
+                </div>`;
                 templateList.appendChild(div);
             });
         }
@@ -90,11 +107,23 @@
         function useTemplate(index) {
             let templates = JSON.parse(localStorage.getItem("templates"));
             let text = templates[index];
-            let playerID = localStorage.getItem("playerID") || "[ID]";
-            let playerName = localStorage.getItem("playerName") || "[Имя]";
-            text = text.replace("{ID}", playerID).replace("{Имя}", playerName);
-            navigator.clipboard.writeText(text);
-            alert("Текст скопирован в буфер обмена!");
+            let playerID = localStorage.getItem("playerID") || "{ID_Игрока}";
+            let playerName = localStorage.getItem("playerName") || "{Имя_Игрока}";
+            text = text.replace("{ID_Игрока}", playerID).replace("{Имя_Игрока}", playerName);
+            document.getElementById("templateText").value = text;
+        }
+        
+        function editTemplate(index) {
+            let templates = JSON.parse(localStorage.getItem("templates"));
+            document.getElementById("templateText").value = templates[index];
+            deleteTemplate(index);
+        }
+        
+        function deleteTemplate(index) {
+            let templates = JSON.parse(localStorage.getItem("templates"));
+            templates.splice(index, 1);
+            localStorage.setItem("templates", JSON.stringify(templates));
+            loadTemplates();
         }
     </script>
 </body>
