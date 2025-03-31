@@ -113,8 +113,8 @@
                 <button onclick="wrapWithUrl()"> [ url ] </button>
             </div>
         </div>
-            <p>Для автоматического заполнения полей добавьте<br> <b>{ID_Игрока} и {Имя_Игрока}</b> в нужные места при<br> создании или редактировании шаблона.</p>
     </div>
+    <p>Для автоматического заполнения полей добавьте<br> <b>{ID_Игрока} и {Имя_Игрока}</b> в нужные места при<br> создании или редактировании шаблона.</p>
     
     <script>
         document.getElementById("playerID").value = localStorage.getItem("playerID") || "";
@@ -188,6 +188,14 @@
             let selectedText = textarea.value.substring(start, end);
             let newText = textarea.value.substring(0, start) + `[${tag}]${selectedText}[/${tag}]` + textarea.value.substring(end);
             textarea.value = newText;
+        }
+
+        function searchTemplate() {
+            let query = document.getElementById("searchTemplate").value.toLowerCase();
+            let templates = document.querySelectorAll(".template-item");
+            templates.forEach(template => {
+                let name = template.getAttribute("data-name").toLowerCase();
+                template.style.display = name.includes(query) ? "block" : "none";
         }
 
         function wrapWithUrl() {
