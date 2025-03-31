@@ -6,7 +6,7 @@
     <title>Генератор отчётов CatWar</title>
     <style>
         body {
-            font-family: Comfortaa; 
+            font-family: 'Comfortaa', sans-serif;
             background-color: #2e1a47;
             color: white;
             display: flex;
@@ -60,7 +60,7 @@
         .button-group {
             display: flex;
             justify-content: center;
-            gap: 5px;
+            gap: 2px;
         }
         .footer {
             text-align: center;
@@ -86,11 +86,10 @@
             <p class="small-text"><i>Сделано metowinny (Багряное Новолуние [1601504])</i></p>
 
             <h2>Добавить данные игрока</h2>
-            <label>ID игрока:</label>
-            <input type="text" id="playerID" placeholder="Введите Ваш ID">
-            <br>
-            <label>Имя игрока:</label>
-            <input type="text" id="playerName" placeholder="Введите Ваше имя">
+            <div class="input-group">
+                <input type="text" id="playerID" placeholder="Введите ваш ID">
+                <input type="text" id="playerName" placeholder="Введите ваше имя">
+            </div>
             <button onclick="saveUserData()">Сохранить</button>
             
             <h2>Добавить новый шаблон</h2>
