@@ -70,7 +70,7 @@
             display: flex;
             width: 50%;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             gap: 10px;
         }
         .footer {
@@ -176,6 +176,17 @@
             templates.splice(index, 1);
             localStorage.setItem("templates", JSON.stringify(templates));
             loadTemplates();
+        }
+
+        function wrapWithUrl() {
+            let textarea = document.getElementById("templateText");
+            let url = navigator.clipboard.readText().then(link => {
+                let start = textarea.selectionStart;
+                let end = textarea.selectionEnd;
+                let selectedText = textarea.value.substring(start, end);
+                let newText = textarea.value.substring(0, start) + `[url=${link}]${selectedText}[/url]` + textarea.value.substring(end);
+                textarea.value = newText;
+            });
         }
     </script>
 </body>
