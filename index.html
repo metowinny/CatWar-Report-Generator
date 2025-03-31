@@ -135,6 +135,30 @@
                 templateList.appendChild(div);
             });
         }
+
+        function useTemplate(index) {
+            let templates = JSON.parse(localStorage.getItem("templates"));
+            let text = templates[index].text;
+            let playerID = localStorage.getItem("playerID") || "{ID_Игрока}";
+            let playerName = localStorage.getItem("playerName") || "{Имя_Игрока}";
+            text = text.replace(/{ID_Игрока}/g, playerID).replace(/{Имя_Игрока}/g, playerName);
+            document.getElementById("templateText").value = text;
+            document.getElementById("templateName").value = templates[index].name;
+        }
+        
+        function editTemplate(index) {
+            let templates = JSON.parse(localStorage.getItem("templates"));
+            document.getElementById("templateName").value = templates[index].name;
+            document.getElementById("templateText").value = templates[index].text;
+            deleteTemplate(index);
+        }
+        
+        function deleteTemplate(index) {
+            let templates = JSON.parse(localStorage.getItem("templates"));
+            templates.splice(index, 1);
+            localStorage.setItem("templates", JSON.stringify(templates));
+            loadTemplates();
+        }
     </script>
 </body>
 </html>
