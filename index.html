@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Генератор отчётов CatWar</title>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap" rel="stylesheet">
-    <style>
+        <style>
         body {
             font-family: 'Comfortaa', sans-serif;
             background-color: #2e1a47;
@@ -14,6 +14,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            overflow: hidden;
         }
         .container {
             display: flex;
@@ -26,10 +27,14 @@
         .sidebar {
             width: 500px;
             padding-right: 20px;
+            overflow-y: auto;
+            max-height: 80vh;
         }
         .main {
             flex-grow: 1;
             text-align: center;
+            overflow-y: auto;
+            max-height: 80vh;
         }
         .input-group {
             display: flex;
@@ -93,7 +98,7 @@
         <div class="main">
             <h1>✦ Генератор отчётов ✦</h1>
             <p class="small-text"><i>Сделано metowinny (Багряное Новолуние [1601504])</i></p>
-
+            <br><p>✧✧✧</p><br>
             <h2>Информация об игроке</h2>
             <div class="input-group">
                 <input type="text" id="playerID" placeholder="Введите Ваш ID">
