@@ -6,7 +6,7 @@
     <title>Генератор отчётов CatWar</title>
     <style>
         body {
-            font-family: "Courier New", monospace;
+            font-family: Comfortaa; 
             background-color: #2e1a47;
             color: white;
             display: flex;
@@ -81,12 +81,14 @@
         </div>
         <div class="main">
             <h1>Генератор отчётов CatWar</h1>
-            <p>Для автоматического заполнения полей Имя Игрока и ID Игрока добавьте {ID_Игрока} и {Имя_Игрока} в нужные места.</p>
-            <p class="small-text">Сделано metowinny (Багряное Новолуние [1601504])</p>
-            <label>ID Игрока:</label>
-            <input type="text" id="playerID" placeholder="Введите ваш ID">
-            <label>Имя Игрока:</label>
-            <input type="text" id="playerName" placeholder="Введите ваше имя">
+            <p>Для автоматического заполнения полей добавьте <b>{ID_Игрока} и {Имя_Игрока}</b> в нужные места.</p>
+            <p class="small-text"><i>Сделано metowinny (Багряное Новолуние [1601504])</i></p>
+
+            <h2>Добавить данные игрока</h2>
+            <label>ID игрока:</label>
+            <input type="text" id="playerID" placeholder="Введите Ваш ID">
+            <label>Имя игрока:</label>
+            <input type="text" id="playerName" placeholder="Введите Ваше имя">
             <button onclick="saveUserData()">Сохранить</button>
             
             <h2>Добавить новый шаблон</h2>
