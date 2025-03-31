@@ -106,7 +106,10 @@
             <textarea id="templateText" placeholder="Введите текст отчёта"></textarea>
             <div class="button-group">
                 <button onclick="saveTemplate()">Сохранить шаблон</button>
-                <button onclick="wrapWithUrl()">URL</button>
+                <button onclick="copyText()">Скопировать</button>
+                <button onclick="wrapWithTag('b')">[b]</button>
+                <button onclick="wrapWithTag('i')">[i]</button>
+                <button onclick="wrapWithUrl()">URL</button
             </div>
             <p>Для автоматического заполнения полей добавьте<br> <b>{ID_Игрока} и {Имя_Игрока}</b> в нужные места при<br> создании или редактировании шаблона.</p>
         </div>
@@ -175,6 +178,15 @@
             templates.splice(index, 1);
             localStorage.setItem("templates", JSON.stringify(templates));
             loadTemplates();
+        }
+
+        function wrapWithTag(tag) {
+            let textarea = document.getElementById("templateText");
+            let start = textarea.selectionStart;
+            let end = textarea.selectionEnd;
+            let selectedText = textarea.value.substring(start, end);
+            let newText = textarea.value.substring(0, start) + `[${tag}]${selectedText}[/${tag}]` + textarea.value.substring(end);
+            textarea.value = newText;
         }
 
         function wrapWithUrl() {
