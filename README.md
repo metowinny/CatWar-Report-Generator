@@ -1,2 +1,2 @@
-# CatWar Report Generato
+# CatWar Report Generator
 Простой генератор отчётов для CatWar с возможностью сохранения данных и добавления новых шаблонов в библиотеку.
