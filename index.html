@@ -88,7 +88,7 @@
         }
     .button-group {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
         flex-wrap: wrap;
         gap: 3px;
@@ -96,8 +96,8 @@
     }
     .button-group button {
         flex: 1;
-        min-width: 100px;
-        max-width: 120px; 
+        min-width: 90px;
+        max-width: 100px; 
     }
         .footer {
             text-align: center;
@@ -183,8 +183,8 @@
                 div.classList.add("template-item");
                 div.innerHTML = `<strong>${template.name}</strong>
                 <div class='button-group'>
-                    <button onclick="useTemplate(${index})">Использовать</button>
-                    <button onclick="editTemplate(${index})">Редактировать</button>
+                    <button onclick="useTemplate(${index})">Выбрать</button>
+                    <button onclick="editTemplate(${index})">Изменить</button>
                     <button onclick="deleteTemplate(${index})">Удалить</button>
                 </div>`;
                 templateList.appendChild(div);
