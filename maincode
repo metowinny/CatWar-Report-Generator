@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор отчётов CatWar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2e1a47;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #4b2c6f;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        input, textarea, button {
+            width: 100%;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+        button {
+            background: #7d4ac7;
+            color: white;
+            cursor: pointer;
+        }
+        .template-list {
+            text-align: left;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Генератор отчётов CatWar</h1>
+        <label>ID Игрока:</label>
+        <input type="text" id="playerID" placeholder="Введите ваш ID">
+        <label>Имя Игрока:</label>
+        <input type="text" id="playerName" placeholder="Введите ваше имя">
+        <button onclick="saveUserData()">Сохранить</button>
+        
+        <h2>Шаблоны отчётов</h2>
+        <textarea id="templateText" placeholder="Введите текст отчёта"></textarea>
+        <button onclick="saveTemplate()">Добавить шаблон</button>
+        
+        <h3>Сохранённые шаблоны:</h3>
+        <div class="template-list" id="templateList"></div>
+    </div>
+    
+    <script>
+        // Загрузка сохранённых данных
+        document.getElementById("playerID").value = localStorage.getItem("playerID") || "";
+        document.getElementById("playerName").value = localStorage.getItem("playerName") || "";
+        loadTemplates();
+        
+        function saveUserData() {
+            localStorage.setItem("playerID", document.getElementById("playerID").value);
+            localStorage.setItem("playerName", document.getElementById("playerName").value);
+            alert("Данные сохранены!");
+        }
+        
+        function saveTemplate() {
+            let text = document.getElementById("templateText").value;
+            if (text.trim() === "") return;
+            let templates = JSON.parse(localStorage.getItem("templates")) || [];
+            templates.push(text);
+            localStorage.setItem("templates", JSON.stringify(templates));
+            loadTemplates();
+            document.getElementById("templateText").value = "";
+        }
+        
+        function loadTemplates() {
+            let templates = JSON.parse(localStorage.getItem("templates")) || [];
+            let templateList = document.getElementById("templateList");
+            templateList.innerHTML = "";
+            templates.forEach((template, index) => {
+                let div = document.createElement("div");
+                div.innerHTML = `<p>${template}</p> <button onclick="useTemplate(${index})">Использовать</button>`;
+                templateList.appendChild(div);
+            });
+        }
+        
+        function useTemplate(index) {
+            let templates = JSON.parse(localStorage.getItem("templates"));
+            let text = templates[index];
+            let playerID = localStorage.getItem("playerID") || "[ID]";
+            let playerName = localStorage.getItem("playerName") || "[Имя]";
+            text = text.replace("{ID}", playerID).replace("{Имя}", playerName);
+            navigator.clipboard.writeText(text);
+            alert("Текст скопирован в буфер обмена!");
+        }
+    </script>
+</body>
+</html>
