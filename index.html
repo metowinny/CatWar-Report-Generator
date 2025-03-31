@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Генератор отчётов CatWar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Comfortaa', sans-serif;
@@ -87,13 +88,13 @@
 
             <h2>Добавить данные игрока</h2>
             <div class="input-group">
-                <textarea id="playerID" placeholder="Введите ваш ID"></textarea>
-                <textarea id="playerName" placeholder="Введите ваше имя"></textarea>
+                <input type="text" id="playerID" placeholder="Введите ваш ID">
+                <input type="text" id="playerName" placeholder="Введите ваше имя">
             </div>
             <button onclick="saveUserData()">Сохранить</button>
             
             <h2>Добавить новый шаблон</h2>
-            <textarea id="templateName" placeholder="Название шаблона"></textarea>
+            <input type="text" id="templateName" placeholder="Название шаблона">
             <textarea id="templateText" placeholder="Введите текст отчёта"></textarea>
             <button onclick="saveTemplate()">Сохранить шаблон</button>
         </div>
