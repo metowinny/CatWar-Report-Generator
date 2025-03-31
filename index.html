@@ -17,14 +17,14 @@
         }
         .container {
             display: flex;
-            max-width: 900px;
+            max-width: 1100px;
             width: 100%;
             background: #4b2c6f;
             padding: 20px;
             border-radius: 10px;
         }
         .sidebar {
-            width: 300px;
+            width: 400px;
             padding-right: 20px;
         }
         .main {
@@ -43,7 +43,7 @@
             width: calc(100% - 20px);
             margin: 10px;
             padding: 10px;
-            border-radius: 5px;
+            border-radius: 10px;
             border: none;
             font-family: 'Comfortaa', sans-serif;
         }
@@ -62,7 +62,7 @@
         .template-item {
             background: #5d3a8d;
             padding: 10px;
-            border-radius: 5px;
+            border-radius: 10px;
             margin-bottom: 10px;
             text-align: center;
         }
@@ -149,17 +149,29 @@
             });
         }
 
-        function wrapWithUrl() {
-            navigator.clipboard.readText().then((url) => {
-                let textarea = document.getElementById("templateText");
-                let start = textarea.selectionStart;
-                let end = textarea.selectionEnd;
-                let selectedText = textarea.value.substring(start, end) || "ссылка";
-                let newText = `[url=${url}]${selectedText}[/url]`;
-                textarea.setRangeText(newText, start, end, "end");
-            }).catch(err => {
-                alert("Ошибка: скопируйте ссылку в буфер обмена перед вставкой.");
-            });
+        function useTemplate(index) {
+            let templates = JSON.parse(localStorage.getItem("templates")) || [];
+            let template = templates[index];
+            let text = template.text.replace(/{ID_Игрока}/g, localStorage.getItem("playerID") || "")
+                                    .replace(/{Имя_Игрока}/g, localStorage.getItem("playerName") || "");
+            document.getElementById("templateText").value = text;
+        }
+
+        function editTemplate(index) {
+            let templates = JSON.parse(localStorage.getItem("templates")) || [];
+            let template = templates[index];
+            document.getElementById("templateName").value = template.name;
+            document.getElementById("templateText").value = template.text;
+            templates.splice(index, 1);
+            localStorage.setItem("templates", JSON.stringify(templates));
+            loadTemplates();
+        }
+
+        function deleteTemplate(index) {
+            let templates = JSON.parse(localStorage.getItem("templates")) || [];
+            templates.splice(index, 1);
+            localStorage.setItem("templates", JSON.stringify(templates));
+            loadTemplates();
         }
     </script>
 </body>
