@@ -35,7 +35,7 @@
             width: calc(100% - 40px);
             margin: 10px;
             padding: 10px;
-            border-radius: 2px;
+            border-radius: 10px;
             border-color: #2B1545;
             border: none;
             font-family: 'Comfortaa', sans-serif;
@@ -55,7 +55,7 @@
         .template-item {
             background: #5d3a8d;
             padding: 20px;
-            border-radius: 5px;
+            border-radius: 10px;
             margin-bottom: 20px;
             text-align: center;
         }
@@ -88,15 +88,11 @@
             <p class="small-text"><i>Сделано metowinny (Багряное Новолуние [1601504])</i></p>
 
             <h2>Добавить данные игрока</h2>
-            <div class="row">
-  <div class="col">
-    <input type="text" id="playerID" placeholder="Введите ваш ID">
-  </div>
-  <div class="col">
-    <input type="text" id="playerName" placeholder="Введите ваше имя">
-  </div>
-            <button onclick="saveUserData()">Сохранить</button>
+            <div class="input-group">
+                <input type="text" id="playerID" placeholder="Введите ваш ID">
+                <input type="text" id="playerName" placeholder="Введите ваше имя">
             </div>
+            <button onclick="saveUserData()">Сохранить</button>
             
             <h2>Добавить новый шаблон</h2>
             <input type="text" id="templateName" placeholder="Название шаблона">
